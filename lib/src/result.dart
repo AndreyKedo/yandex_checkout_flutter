@@ -1,4 +1,4 @@
-import 'package:yandex_checkout/src/enums/payment_method.dart';
+import 'package:yandex_checkout_flutter/src/enums/payment_method.dart';
 
 ///[Result] sealed class. Extended classes [TokenizationResult], [CancelResult].
 ///[whenWithResult] handler result success either fail.

@@ -1,4 +1,4 @@
-import 'package:yandex_checkout/src/payment_parameters/amount.dart';
+import 'package:yandex_checkout_flutter/src/payment_parameters/amount.dart';
 
 ///Wrapper for test parameters
 /// [showLogs] (optional) shows mSDK logs in the logcat (all mSDK logs start with tag "Yandex.Checkout.SDK").

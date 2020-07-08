@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:yandex_checkout/src/enums/google_pay_parameters.dart';
-import 'package:yandex_checkout/src/enums/payment_method.dart';
-import 'package:yandex_checkout/src/enums/save_payment_method.dart';
-import 'package:yandex_checkout/src/payment_parameters/amount.dart';
+import 'package:yandex_checkout_flutter/src/enums/google_pay_parameters.dart';
+import 'package:yandex_checkout_flutter/src/enums/payment_method.dart';
+import 'package:yandex_checkout_flutter/src/enums/save_payment_method.dart';
+import 'package:yandex_checkout_flutter/src/payment_parameters/amount.dart';
 
 ///Wrapper for payment parameters.
 ///[amount] payment amount, see [Amount]. Available payment options can vary depending on amount.

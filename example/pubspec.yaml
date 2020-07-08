@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  yandex_checkout:
+  yandex_checkout_flutter:
     path: ../
 dev_dependencies:
   flutter_test:

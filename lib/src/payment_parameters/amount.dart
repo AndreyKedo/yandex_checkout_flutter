@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:yandex_checkout/src/enums/currency.dart';
+import 'package:yandex_checkout_flutter/src/enums/currency.dart';
 
 ///Payment amount.
 ///[value] amount value

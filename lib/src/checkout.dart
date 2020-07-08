@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
-import 'package:yandex_checkout/src/payment_parameters/mock_parameters.dart';
-import 'package:yandex_checkout/src/payment_parameters/payment_parameters.dart';
-import 'package:yandex_checkout/src/result.dart';
+import 'package:yandex_checkout_flutter/src/payment_parameters/mock_parameters.dart';
+import 'package:yandex_checkout_flutter/src/payment_parameters/payment_parameters.dart';
+import 'package:yandex_checkout_flutter/src/result.dart';
 
 ///[YandexCheckout] is singleton class for working with YandexCheackout native API.
 class YandexCheckout {
