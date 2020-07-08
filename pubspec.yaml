@@ -1,0 +1,26 @@
+name: yandex_checkout
+description: Implementation Yandex Checkout SDK for Flutter
+version: 1.0.0
+author: https://gitlab.com/andreykedo
+homepage: https://github.com/yandex-money/yandex-checkout-android-sdk
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: ru.scar.yandex_checkout
+        pluginClass: YandexCheckoutPlugin
+#      ios:
+#        pluginClass: YandexCheckoutPlugin
