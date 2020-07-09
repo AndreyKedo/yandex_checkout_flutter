@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yandex_checkout_flutter/yandex_checkout.dart';
+import 'package:yandex_checkout_flutter/yandex_checkout_flutter.dart';
 
 void main() {
   runApp(MyApp());
