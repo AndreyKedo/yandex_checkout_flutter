@@ -1,8 +1,9 @@
 # YandexCheckout
 
-Implementation Yandex Checkout SDK for platforms.
+Implementation Yandex Checkout SDK for Flutter.
+Official documentation for [native lib (Android)](https://github.com/yandex-money/yandex-checkout-android-sdk)
 
-Use official documentation for [native lib](https://github.com/yandex-money/yandex-checkout-android-sdk)
+Use official documentation for [settings Yandex.Login feature](https://github.com/yandex-money/yandex-checkout-android-sdk#%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-yandexloginsdk)
 
 > **Plugin not supported for IOS!**
 ## Feature
@@ -13,25 +14,65 @@ Use official documentation for [native lib](https://github.com/yandex-money/yand
 
 ## Example
 
+Demonstrated how use plugin features.
+
+### Test checkout
+
+```dart
+void checkout() async{
+ final Result result = await YandexCheckout().startTestCheckout(
+     PaymentParameters(
+       amount: Amount(currency: Currency.RUB, value: 20.99),
+       title: 'Anything',
+       subTitle: 'Subtitle anything',
+       clientApplicationKey: 'test_token',
+       paymentMethodTypes: [
+          PaymentMethodType.SBERBANK,
+          PaymentMethodType.BANK_CARD,
+          PaymentMethodType.GOOGLE_PAY
+       ],
+       shopId: '000000'),
+       TestParameters()
+       );
+       if(result.hasError){
+          //If checkout process ended with error
+       }
+       else if(result.hasData){
+         //Take TokenizationResult result.data
+       }
+       else{
+          //If checkout process cancel
+       }
+}
 ```
-                    final Result result = await YandexCheckout().startTestCheckout(
-                        PaymentParameters(
-                            amount: Amount(currency: Currency.RUB, value: 20.99),
-                            title: 'Anything',
-                            subTitle: 'Subtitle anything',
-                            clientApplicationKey: 'test_token',
-                            paymentMethodTypes: [
-                              PaymentMethodType.SBERBANK,
-                              PaymentMethodType.BANK_CARD,
-                              PaymentMethodType.GOOGLE_PAY
-                            ],
-                            shopId: '000000'),
-                        TestParameters()
-                    );
-                    if(result.hasError)
-                      //If checkout process ended with error
-                    else if(result.hasData)
-                      //Take TokenizationResult result.data
-                    else
-                     //If checkout process cancel
+
+### Default checkout
+
+```dart
+void checkout() async{
+  final Result result = await YandexCheckout().startCheckout(
+    PaymentParameters(
+           amount: Amount(currency: Currency.RUB, value: 20.99),
+           title: 'Anything',
+           subTitle: 'Subtitle anything',
+           clientApplicationKey: 'YOUR_TOKEN',
+           shopId: 'YOUR_SHOP_ID')
+  );
+  result.whenWithResult<void>((result){
+    //Success
+  }, (){
+    //Cancel
+  }, (){
+    //Error
+  });
+}
+```
+
+### 3Ds checkout
+
+```dart
+void checkout() async{
+ final Result result = await YandexCheckout().start3DsCheckout('YOUR_3DS_URL');
+ //Handle result...
+}
 ```

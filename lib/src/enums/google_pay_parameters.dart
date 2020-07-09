@@ -1,7 +1,8 @@
 import 'package:yandex_checkout_flutter/src/payment_parameters/payment_parameters.dart';
 
 ///Settings for Google Pay payment method. This class is one of the parameters of [PaymentParameters].
-///If no value is specified, the default set will be use
+///It has the following values [AMEX], [DISCOVER], [JCB], [MASTERCARD], [VISA], [INTERAC], [OTHER].
+///If no value is specified, the default set will be use.
 class GooglePayParameters{
   final String index;
 

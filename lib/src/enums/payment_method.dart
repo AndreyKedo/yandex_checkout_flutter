@@ -1,17 +1,16 @@
-///Type of selected payment method.
-///[YANDEX_MONEY] - payment method Yandex.Money.
-///[GOOGLE_PAY] -  payment method Google pay.
-///[BANK_CARD] - payment method Bank card.
-///[SBERBANK] - payment method Sberbank/
-
+///Type of selected payment method. It has the following values [YANDEX_MONEY], [GOOGLE_PAY], [BANK_CARD], [SBERBANK].
 class PaymentMethodType{
   final String index;
 
   const PaymentMethodType._(this.index);
-  
+
+  ///Payment method Yandex.Money.
   static const PaymentMethodType YANDEX_MONEY = const PaymentMethodType._('yandex');
+  ///Payment method Google pay.
   static const PaymentMethodType GOOGLE_PAY = const PaymentMethodType._('google_pay');
+  ///Payment method Bank card.
   static const PaymentMethodType BANK_CARD = const PaymentMethodType._('card');
+  ///Payment method Sberbank.
   static const PaymentMethodType SBERBANK = const PaymentMethodType._('sberbank');
 
   static PaymentMethodType tryParse(String index){

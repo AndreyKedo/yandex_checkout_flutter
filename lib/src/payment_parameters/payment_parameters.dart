@@ -4,21 +4,6 @@ import 'package:yandex_checkout_flutter/src/enums/payment_method.dart';
 import 'package:yandex_checkout_flutter/src/enums/save_payment_method.dart';
 import 'package:yandex_checkout_flutter/src/payment_parameters/amount.dart';
 
-///Wrapper for payment parameters.
-///[amount] payment amount, see [Amount]. Available payment options can vary depending on amount.
-///[title] name of the goods to be bought.
-///[subtitle] description of the goods to be bought.
-///[clientApplicationKey] merchant token from Yandex.Checkout.
-///[shopId] shop id from Yandex.Checkout.
-///[savePaymentMethod] setting for saving payment method (see [SavePaymentMethod]]).
-///[paymentMethodTypes] (optional) set of permitted method types. Empty set or parameter absence means that all
-///payment methods are allowed. See [PaymentMethodType].
-///[gatewayId] (optional) your gateway id from Yandex.Money.
-///[customReturnUrl] (optional) redirect url for custom 3ds. This parameter should be used only if you want to use
-///your own 3ds activity.
-///[userPhoneNumber] (optional) phone number of the user. It will be inserted into the form
-///that is used by "Sberbank online" payment method. Format for this number is "+7XXXXXXXXXX".
-///[googlePayParameters] (optional) settings for Google Pay (see [GooglePayParameters]).
 //{
 //  "amount":{
 //    "value": 0.0,
@@ -35,17 +20,30 @@ import 'package:yandex_checkout_flutter/src/payment_parameters/amount.dart';
 //  "user_phone": "+xxxxxxxxxxx",
 //  "google_pay_parameters": ["amex", "discover", "jcb", "mastercard", "visa", "interac", "other"]
 //}
+
+///Wrapper for payment parameters.
 class PaymentParameters{
+  ///Payment amount, see [Amount]. Available payment options can vary depending on amount.
   final Amount amount;
+  ///Name of the goods to be bought.
   final String title;
+  ///Description of the goods to be bought.
   final String subTitle;
+  ///Merchant token from Yandex.Checkout.
   final String clientApplicationKey;
+  ///Shop id from Yandex.Checkout.
   final String shopId;
+  ///Setting for saving payment method. See [SavePaymentMethod]).
   final SavePaymentMethod savePaymentMethod;
+  ///Set of permitted method types. Empty set or parameter absence means that all payment methods are allowed. See [PaymentMethodType].
   final List<PaymentMethodType> paymentMethodTypes;
+  ///Your gateway id from Yandex.Money.
   final String gatewayId;
+  ///Redirect url for custom 3ds. This parameter should be used only if you want to use your own 3ds activity.
   final String customReturnUrl;
+  ///Phone number of the user. It will be inserted into the form that is used by "Sberbank online" payment method. Format for this number is "+7XXXXXXXXXX".
   final String userPhoneNumber;
+  ///Settings for Google Pay. See [GooglePayParameters].
   final List<GooglePayParameters> googlePayParameters;
 
 

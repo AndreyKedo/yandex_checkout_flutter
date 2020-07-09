@@ -1,12 +1,5 @@
 import 'package:yandex_checkout_flutter/src/payment_parameters/amount.dart';
 
-///Wrapper for test parameters
-/// [showLogs] (optional) shows mSDK logs in the logcat (all mSDK logs start with tag "Yandex.Checkout.SDK").
-/// [googlePayTestEnvironment] (optional) enables google pay test environment - all transactions made with
-/// Google Pay will use [WalletConstants.ENVIRONMENT_TEST]. More at:
-/// https://developers.google.com/pay/api/android/guides/test-and-deploy/integration-checklist#about-the-test-environment.
-/// [mockConfiguration] (optional) configuration for mock parameters. If this parameter is present, mSDK will
-/// work in offline test mode. Token created with this configuration can't be used for payments.
 //{
 //  "show_logs" : true,
 //  "google_pay_test" : false,
@@ -20,9 +13,14 @@ import 'package:yandex_checkout_flutter/src/payment_parameters/amount.dart';
 //      }
 //  }
 //}
+
+///Wrapper for test parameters.
 class TestParameters{
+  ///Shows mSDK logs in the logcat (all mSDK logs start with tag "Yandex.Checkout.SDK").
   final bool showLogs;
+  ///Enables google pay test environment - all transactions made with. Google Pay will use [WalletConstants.ENVIRONMENT_TEST]. More at: https://developers.google.com/pay/api/android/guides/test-and-deploy/integration-checklist#about-the-test-environment.
   final bool googlePayTestEnvironment;
+  ///Configuration for mock parameters. If this parameter is present, mSDK will work in offline test mode. Token created with this configuration can't be used for payments.
   final MockConfiguration mockConfiguration;
 
   TestParameters({
@@ -38,14 +36,14 @@ class TestParameters{
 }
 
 ///Mock configuration. This parameters can be used only in offline test mode
-/// [completeWithError] complete payment with error
-/// [paymentAuthPassed] get preauthorized user
-/// [linkedCardsCount] number of linked cards for authorized user
-/// [serviceFee] fee, that will be shown on the contract
 class MockConfiguration{
+  ///Complete payment with error.
   final bool completeWithError;
+  ///Get preauthorized user
   final bool paymentAuthPassed;
+  ///Number of linked cards for authorized user
   final int linkedCardsCount;
+  ///Fee, that will be shown on the contract
   final Amount serviceFee;
 
   const MockConfiguration({

@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:yandex_checkout_flutter/src/enums/currency.dart';
 
 ///Payment amount.
-///[value] amount value
-///[currency] amount [Currency]
 class Amount{
+  ///Amount [Currency].
   final Currency currency;
+  ///Amount value.
   final double value;
 
   const Amount({@required this.currency, @required this.value});

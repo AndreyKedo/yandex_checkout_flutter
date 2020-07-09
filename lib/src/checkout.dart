@@ -3,7 +3,7 @@ import 'package:yandex_checkout_flutter/src/payment_parameters/mock_parameters.d
 import 'package:yandex_checkout_flutter/src/payment_parameters/payment_parameters.dart';
 import 'package:yandex_checkout_flutter/src/result.dart';
 
-///[YandexCheckout] is singleton class for working with YandexCheackout native API.
+///Is singleton class for working with Yandex Checkout native API.
 class YandexCheckout {
   static const MethodChannel _channel = const MethodChannel('yandex_checkout');
 
