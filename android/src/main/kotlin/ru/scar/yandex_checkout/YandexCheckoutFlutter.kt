@@ -25,8 +25,8 @@ open class YandexCheckoutFlutter : ActivityAware, PluginRegistry.ActivityResultL
     }
 
     fun startTokenize(checkoutParam : CheckoutParam, resultCallback: ResultCallback){
-        if(callback == null){
-            Log.d("YandexCheckoutPlugin", "Input data tokenize $checkoutParam")
+        if(callback == null && binding != null){
+            Log.d(TAG, "Input data tokenize $checkoutParam")
             callback = resultCallback
             binding?.let {
                 when(checkoutParam){
@@ -99,5 +99,4 @@ open class YandexCheckoutFlutter : ActivityAware, PluginRegistry.ActivityResultL
         binding?.removeActivityResultListener(this)
         binding = null
     }
-
 }

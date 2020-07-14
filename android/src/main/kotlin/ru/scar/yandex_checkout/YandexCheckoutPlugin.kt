@@ -11,6 +11,8 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 import ru.yandex.money.android.sdk.TokenizationResult
 
+const val TAG : String = "YandexCheckoutPlugin"
+
 /** YandexCheckoutPlugin */
 class YandexCheckoutPlugin: FlutterPlugin, MethodCallHandler, YandexCheckoutFlutter() {
   private lateinit var channel : MethodChannel
@@ -28,7 +30,7 @@ class YandexCheckoutPlugin: FlutterPlugin, MethodCallHandler, YandexCheckoutFlut
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    Log.d("YandexCheckoutPlugin", "Call method ${call.method} with data ${call.arguments}")
+    Log.d(TAG, "Call method ${call.method} with data ${call.arguments}")
     when (call.method){
       "startPay" -> {
         val callbackHandler = object : ResultCallback {
@@ -50,13 +52,13 @@ class YandexCheckoutPlugin: FlutterPlugin, MethodCallHandler, YandexCheckoutFlut
                 startTokenize(DebugCheckout(parsePaymentParameters(parametersHashMap), parseMockParam(mockParamMap)), callbackHandler)
               else
                 result.error(
-                        "YandexCheckoutPlugin",
+                        TAG,
                         "Parameters not must be null",
                         if(parametersHashMap == null) "PaymentParameters not must be null!" else "TestParameters not must be null!"
                 )
             }
             call.arguments is String -> startTokenize(Checkout3Ds(call.arguments as String), callbackHandler)
-            else -> startTokenize(DefaultCheckout(parsePaymentParameters(call.arguments as HashMap<String, *>)), callbackHandler)
+            else -> startTokenize(DefaultCheckout(parsePaymentParameters(call.arguments<HashMap<String, Any>>())), callbackHandler)
         }
       }
       else -> result.notImplemented()
