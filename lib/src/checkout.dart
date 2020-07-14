@@ -29,8 +29,8 @@ class YandexCheckout {
   ///Test checkout process. Only for DEBUG!
   ///[PaymentParameters] parameters for starting checkout process.
   ///[TestParameters] mocking parameters for offline checkout.
-  Future<Result> startTestCheckout(PaymentParameters paymentParameters, TestParameters testParameters) async {
-    assert(paymentParameters != null && testParameters != null);
+  Future<Result> startTestCheckout(PaymentParameters paymentParameters, {TestParameters testParameters = const TestParameters()}) async {
+    assert(paymentParameters != null);
     assert(paymentParameters.isValid);
     final Map<String, dynamic> result = await _channel.invokeMapMethod<String, dynamic>('startPay', <String, dynamic>{
       'payment_parameters': paymentParameters.map,
