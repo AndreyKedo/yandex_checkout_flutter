@@ -36,7 +36,7 @@ class PaymentParameters{
   ///Setting for saving payment method. See [SavePaymentMethod]).
   final SavePaymentMethod savePaymentMethod;
   ///Set of permitted method types. Empty set or parameter absence means that all payment methods are allowed. See [PaymentMethodType].
-  final List<PaymentMethodType> paymentMethodTypes;
+  final Set<PaymentMethodType> paymentMethodTypes;
   ///Your gateway id from Yandex.Money.
   final String gatewayId;
   ///Redirect url for custom 3ds. This parameter should be used only if you want to use your own 3ds activity.
@@ -44,7 +44,7 @@ class PaymentParameters{
   ///Phone number of the user. It will be inserted into the form that is used by "Sberbank online" payment method. Format for this number is "+7XXXXXXXXXX".
   final String userPhoneNumber;
   ///Settings for Google Pay. See [GooglePayParameters].
-  final List<GooglePayParameters> googlePayParameters;
+  final Set<GooglePayParameters> googlePayParameters;
 
 
   const PaymentParameters({

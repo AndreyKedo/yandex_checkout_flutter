@@ -28,12 +28,12 @@ class PaymentMethodType{
     }
   }
 
-  static const List<PaymentMethodType> all = const <PaymentMethodType>[
+  static const Set<PaymentMethodType> all = const <PaymentMethodType>{
     YANDEX_MONEY,
     GOOGLE_PAY,
     BANK_CARD,
     SBERBANK
-  ];
+  };
 
   @override
   String toString() => index;

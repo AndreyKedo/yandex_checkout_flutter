@@ -23,7 +23,7 @@ class TestParameters{
   ///Configuration for mock parameters. If this parameter is present, mSDK will work in offline test mode. Token created with this configuration can't be used for payments.
   final MockConfiguration mockConfiguration;
 
-  TestParameters({
+  const TestParameters({
     this.showLogs = false,
     this.googlePayTestEnvironment = false,
     this.mockConfiguration = const MockConfiguration()});

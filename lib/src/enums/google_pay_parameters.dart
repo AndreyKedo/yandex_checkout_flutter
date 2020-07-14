@@ -16,13 +16,13 @@ class GooglePayParameters{
   static const GooglePayParameters INTERAC = const GooglePayParameters._('interac');
   static const GooglePayParameters OTHER = const GooglePayParameters._('other');
 
-  static const List<GooglePayParameters> all = const <GooglePayParameters>[
+  static const Set<GooglePayParameters> all = const <GooglePayParameters>{
     AMEX,
     DISCOVER,
     JCB,
     VISA,
     MASTERCARD
-  ];
+  };
 
   @override
   String toString() => index;
