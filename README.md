@@ -20,20 +20,22 @@ Demonstrated how use plugin features.
 
 ```dart
 void checkout() async{
- final Result result = await YandexCheckout().startTestCheckout(
-     PaymentParameters(
-       amount: Amount(currency: Currency.RUB, value: 20.99),
-       title: 'Anything',
-       subTitle: 'Subtitle anything',
-       clientApplicationKey: 'test_token',
-       paymentMethodTypes: [
-          PaymentMethodType.SBERBANK,
-          PaymentMethodType.BANK_CARD,
-          PaymentMethodType.GOOGLE_PAY
-       ],
-       shopId: '000000'),
-       TestParameters()
-       );
+      final PaymentParameters param = PaymentParameters(
+             amount: Amount(currency: Currency.RUB, value: 20.99),
+             title: 'Anything',
+             subTitle: 'Subtitle anything',
+             clientApplicationKey: 'test_token',
+             paymentMethodTypes: {
+                PaymentMethodType.SBERBANK,
+                PaymentMethodType.BANK_CARD,
+                PaymentMethodType.GOOGLE_PAY,
+             },
+             googlePayParameters: {
+                GooglePayParameters.MASTERCARD,
+                GooglePayParameters.VISA
+             },
+             shopId: '000000');
+       final Result result = await YandexCheckout().startTestCheckout(param);
        if(result.hasError){
           //If checkout process ended with error
        }
