@@ -19,42 +19,42 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: const Text('Yandex checkout example'),
       ),
-      body: Builder(
-        builder: (context) => Center(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Text(_data, softWrap: true,),
-              ),
-              OutlineButton(
-                  child: const Text('Buy anything...'),
-                  onPressed: () async {
-                    final Result result = await YandexCheckout().startTestCheckout(
-                        PaymentParameters(
-                            amount: Amount(currency: Currency.RUB, value: 20.99),
-                            title: 'Anything',
-                            subTitle: 'Subtitle anything',
-                            clientApplicationKey: 'test_token',
-                            paymentMethodTypes: [
-                              PaymentMethodType.SBERBANK,
-                              PaymentMethodType.BANK_CARD,
-                              PaymentMethodType.GOOGLE_PAY
-                            ],
-                            shopId: '000000'),
-                        TestParameters()
-                    );
-                    if(result.hasError)
-                      setState(() => _data = 'Error');
-                    else if(result.hasData){
-                      final data = result.data;
-                      setState(() => _data = data.token);
-                    }
-                    else
-                     setState(() => _data = 'Checkout cancel');
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: Text(_data, softWrap: true),
+            ),
+            OutlineButton(
+                child: const Text('Buy anything...'),
+                onPressed: () async {
+                  final PaymentParameters param = PaymentParameters(
+                      amount: Amount(currency: Currency.RUB, value: 20.99),
+                      title: 'Anything',
+                      subTitle: 'Subtitle anything',
+                      clientApplicationKey: 'test_token',
+                      paymentMethodTypes: {
+                        PaymentMethodType.SBERBANK,
+                        PaymentMethodType.BANK_CARD,
+                        PaymentMethodType.GOOGLE_PAY,
+                      },
+                      googlePayParameters: {
+                        GooglePayParameters.MASTERCARD,
+                        GooglePayParameters.VISA
+                      },
+                      shopId: '000000');
+                  final Result result = await YandexCheckout().startTestCheckout(param);
+                  if(result.hasError)
+                    setState(() => _data = 'Error');
+                  else if(result.hasData){
+                    final data = result.data;
+                    setState(() => _data = data.token);
                   }
-              )
-            ],
-          ),
+                  else
+                    setState(() => _data = 'Checkout cancel');
+                }
+            )
+          ],
         ),
       ),
     ),
