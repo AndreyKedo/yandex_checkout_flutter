@@ -1,19 +1,20 @@
 import 'package:yandex_checkout_flutter/src/enums/payment_method.dart';
 
-///Is sealed class. Extended classes [TokenizationResult], [CancelResult].
+///Is sealed class. Extended classes [TokenizationResult], [ErrorResult], [CancelResult].
 abstract class Result{
   ///Handler result success either fail. [R] return type from callback.
   R whenWithResult<R>(
-      R Function(TokenizationResult result) success,
-      R Function() cancel,
-      R Function() error,
+      {
+        R Function(TokenizationResult result) success,
+        R Function() cancel,
+        R Function() error,
+      }
       ) {
     if (this is TokenizationResult)
-      return success(this);
+      return success?.call(this) ?? null;
     else if(this is ErrorResult)
-      return error();
-    else
-      return cancel();
+      return error?.call() ?? null;
+    return cancel?.call() ?? null;
   }
   ///Result of successful tokenization is of type [TokenizationResult].
   ///If data not exist it is throw assert.
@@ -23,8 +24,6 @@ abstract class Result{
   }
   ///Return true if result has error.
   bool get hasError => this is ErrorResult;
-  ///Return true if tokenization process is cancel.
-  bool get cancel => this is CancelResult;
   ///Return true if tokenization process ended success.
   bool get hasData => this is TokenizationResult;
 }

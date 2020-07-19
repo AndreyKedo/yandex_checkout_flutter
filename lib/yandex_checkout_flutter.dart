@@ -8,5 +8,6 @@ export 'package:yandex_checkout_flutter/src/payment_parameters/mock_parameters.d
 export 'package:yandex_checkout_flutter/src/payment_parameters/amount.dart';
 
 export 'package:yandex_checkout_flutter/src/result.dart' hide CancelResult, ErrorResult;
+export 'package:yandex_checkout_flutter/src/3ds_result.dart';
 
 export 'package:yandex_checkout_flutter/src/checkout.dart';
