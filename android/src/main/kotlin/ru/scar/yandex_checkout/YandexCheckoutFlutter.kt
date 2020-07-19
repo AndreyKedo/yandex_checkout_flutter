@@ -6,25 +6,22 @@ import io.flutter.Log
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.PluginRegistry
+import ru.scar.yandex_checkout.until.*
 import ru.yandex.money.android.sdk.*
 
 const val REQUEST_TOKENIZE_CODE = 99
-
-interface ResultCallback{
-    fun success(token: TokenizationResult)
-    fun failure(hasError: Boolean?)
-}
+const val REQUEST_3DS_CODE = -100
 
 open class YandexCheckoutFlutter : ActivityAware, PluginRegistry.ActivityResultListener {
     private var binding: ActivityPluginBinding? = null
-    private var callback: ResultCallback? = null
+    private var callback: ResultHandler? = null
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         this.binding = binding
         binding.addActivityResultListener(this)
     }
 
-    fun startTokenize(checkoutParam : CheckoutParam, resultCallback: ResultCallback){
+    fun startTokenize(checkoutParam : CheckoutParam, resultCallback: ResultHandler){
         if(callback == null && binding != null){
             Log.d(TAG, "Input data tokenize $checkoutParam")
             callback = resultCallback
@@ -40,7 +37,7 @@ open class YandexCheckoutFlutter : ActivityAware, PluginRegistry.ActivityResultL
 
     private fun checkout3DS(context: Activity, url: String){
         val intent : Intent = Checkout.create3dsIntent(context, url, ColorScheme.getDefaultScheme())
-        context.startActivityForResult(intent, REQUEST_TOKENIZE_CODE)
+        context.startActivityForResult(intent, REQUEST_3DS_CODE)
     }
 
     private fun checkout(context: Activity, paymentParameters: PaymentParameters){
@@ -60,24 +57,21 @@ open class YandexCheckoutFlutter : ActivityAware, PluginRegistry.ActivityResultL
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) : Boolean{
-        if(requestCode != REQUEST_TOKENIZE_CODE){
-            callback = null
-            return false
-        }
-        when(resultCode){
-            Activity.RESULT_OK -> {
-                if(data != null && callback != null)
-                    callback!!.success(Checkout.createTokenizationResult(data))
+        when(requestCode){
+            REQUEST_TOKENIZE_CODE -> when(resultCode){
+                Activity.RESULT_OK -> {
+                    if(data != null && callback != null)
+                        callback!!.success(Checkout.createTokenizationResult(data))
+                }
+                Activity.RESULT_CANCELED -> callback?.failure(false)
             }
-            Activity.RESULT_CANCELED -> callback?.failure(false)
-            Checkout.RESULT_ERROR -> {
-                if(data != null && callback != null)
-                    callback!!.failure(true)
-            }
-            else -> {
-                callback?.failure(true)
-                callback = null
-                return false
+            REQUEST_3DS_CODE -> when(resultCode){
+                Activity.RESULT_OK -> callback?.success(null)
+                Activity.RESULT_CANCELED -> callback?.failure(false)
+                Checkout.RESULT_ERROR -> {
+                    Log.d(TAG, "3ds ended with error ${data?.getStringExtra(Checkout.EXTRA_ERROR_DESCRIPTION)}")
+                    callback?.failure(true)
+                }
             }
         }
         callback = null

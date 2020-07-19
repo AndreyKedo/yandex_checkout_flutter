@@ -1,4 +1,4 @@
-package ru.scar.yandex_checkout
+package ru.scar.yandex_checkout.until
 
 import ru.yandex.money.android.sdk.PaymentParameters
 import ru.yandex.money.android.sdk.TestParameters
