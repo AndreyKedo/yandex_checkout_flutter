@@ -74,7 +74,7 @@ void checkout() async{
 
 ```dart
 void checkout() async{
- final Result result = await YandexCheckout().start3DsCheckout('YOUR_3DS_URL');
+ final Result3Ds result = await YandexCheckout().start3DsCheckout('YOUR_3DS_URL');
  //Handle result...
 }
 ```
