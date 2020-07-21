@@ -10,7 +10,7 @@ import ru.scar.yandex_checkout.until.*
 import ru.yandex.money.android.sdk.*
 
 const val REQUEST_TOKENIZE_CODE = 99
-const val REQUEST_3DS_CODE = -100
+const val REQUEST_3DS_CODE = 1
 
 open class YandexCheckoutFlutter : ActivityAware, PluginRegistry.ActivityResultListener {
     private var binding: ActivityPluginBinding? = null
@@ -36,7 +36,7 @@ open class YandexCheckoutFlutter : ActivityAware, PluginRegistry.ActivityResultL
     }
 
     private fun checkout3DS(context: Activity, url: String){
-        val intent : Intent = Checkout.create3dsIntent(context, url, ColorScheme.getDefaultScheme())
+        val intent : Intent = Checkout.create3dsIntent(context, url)
         context.startActivityForResult(intent, REQUEST_3DS_CODE)
     }
 
@@ -68,10 +68,7 @@ open class YandexCheckoutFlutter : ActivityAware, PluginRegistry.ActivityResultL
             REQUEST_3DS_CODE -> when(resultCode){
                 Activity.RESULT_OK -> callback?.success(null)
                 Activity.RESULT_CANCELED -> callback?.failure(false)
-                Checkout.RESULT_ERROR -> {
-                    Log.d(TAG, "3ds ended with error ${data?.getStringExtra(Checkout.EXTRA_ERROR_DESCRIPTION)}")
-                    callback?.failure(true)
-                }
+                Checkout.RESULT_ERROR -> callback?.failure(true)
             }
         }
         callback = null
