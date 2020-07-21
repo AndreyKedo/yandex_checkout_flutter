@@ -1,3 +1,7 @@
+## 1.0.0+4
+
+* 3Ds fix
+
 ## 1.0.0+3
 
 * Changed result 3Ds method.
